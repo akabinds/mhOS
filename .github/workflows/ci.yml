@@ -1,0 +1,21 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    name: Build mhOS
+    runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v3
+    - name: Install Rust toolchain
+      uses: actions-rs/toolchain@v1
+      with:
+        profile: minimal
+        toolchain: nightly
+        override: true
+    - uses: Swatinem/rust-cache@v2
+    - run: make build

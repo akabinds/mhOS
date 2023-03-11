@@ -1,0 +1,18 @@
+[package]
+name = "mhOS"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+readme = "README.md"
+description = "A hobbyist operating system, made for fun and learning purposes, targeting the x86-64 ISA"
+rust-version = "1.68"
+
+[[bin]]
+name = "mhos"
+path = "src/main.rs"
+
+[dependencies]
+limine = "0.1.10"
+spin = "0.9.5"
+raw-cpuid = "10.7.0"
+x86_64 = "0.14.10"
