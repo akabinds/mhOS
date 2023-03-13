@@ -5,35 +5,43 @@ It was developed out of a desire to learn how operating systems work and how to 
 
 ## Building mhOS
 
-Please ensure that your host system is Unix-like. If you are on Windows, it is highly recommended to use WSL (Windows Subsystem for Linux).
+Please ensure that your host system is Unix-like. If you are on Windows, it is highly recommended to use WSL2 (Windows Subsystem for Linux 2). Follow the following steps to 
+build mhOS on your system:
 
-### Getting the Source Code
+1. **Install Required Dependencies**
+    ```
+    $ sudo apt install qemu qemu-kvm kvm xorriso curl wget nasm make
+    ```
 
-To build mhOS on your system, first clone the repository:
+2. **Getting the Source Code**
 
-**using git**:
-```
-$ git clone https://github.com/akabinds/mhOS.git  
-```
+    **using git**:
+    ```
+    $ git clone https://github.com/akabinds/mhOS.git  
+    ```
 
-**using git ssh**:
-```
-$ git clone git@github.com:akabinds/mhOS.git
-```
+    **using git ssh**:
+    ```
+    $ git clone git@github.com:akabinds/mhOS.git
+    ```
 
-**using github cli**:
-```
-$ gh repo clone akabinds/mhOS
-```
+    **using github cli**:
+    ```
+    $ gh repo clone akabinds/mhOS
+    ```
 
-### Dependencies
+3. **Install Rust**
 
-Next, install the required dependencies:
+    ```
+    $ curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    ```
 
-- `rust` (latest nightly)
-- `qemu`
-- `nasm`
-- `xorriso`
+4. **Setup Proper Rust Toolchain**
+
+    ```
+    $ rustup install nightly
+    $ rustup default nightly  
+    ```
 
 ### Makefile
 
@@ -47,9 +55,10 @@ If running, there are a few options available that you might want to set:
 - `KBD_LAYOUT` (supported values: **qwerty**, **azerty**, **dvorak**, default: **qwerty**)
 - `CARGO_PROFILE` (supported values: **release**, **debug**, default: **release**)
 - `CARGO_FEATURES` (view `Cargo.toml` for a list of available features)
-- `CARGO_QUIET` (supported values: **true**, **false**, default: **false**)
+- `KVM` (supported values: **yes**, **no**, default: **no**)
+- `QEMU_LOG` (supported values: **yes**, **no**, default: **no**)
 
 You can set these by doing:
 ```
-$ make run OPT=val  
+$ make [CMD] OPT=val  
 ```
