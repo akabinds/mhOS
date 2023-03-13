@@ -1,9 +1,10 @@
 name: CI
 
 on:
-  pull_request:
   push:
     branches: [master]
+  pull_request:
+  workflow_call:
 
 jobs:
   build:
@@ -18,4 +19,9 @@ jobs:
         toolchain: nightly
         override: true
     - uses: Swatinem/rust-cache@v2
-    - run: make build
+    - run: make iso
+    - name: Upload ISO image as build artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: mhos-iso
+        path: ./build/root/mhos-${{ github.ref_name }}.iso
